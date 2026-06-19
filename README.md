@@ -20,8 +20,17 @@ a POSCAR file can be specified as follows:
 ```
 generate-potcar MgO/POSCAR
 ```
-In order to enable this functionality, the `VASP_POTENTIALS` environment variable must be set 
+In order to enable this functionality, the `VASP_POTENTIALS` environment variable must be set
 (see [Installation](#Installation) for more details).
+
+If `VASP_POTENTIALS` points to a directory containing several potential sets, such as
+`potpaw_PBE.64` and `potpaw_LDA.64`, the script will ask which set to use. You can also select
+one directly:
+```
+generate-potcar --potential-set PBE.64
+generate-potcar -p LDA.64 MgO/POSCAR
+```
+The same default can be set with the `VASP_POTENTIAL_SET` environment variable.
 
 ### Convergence Testing
 
@@ -63,11 +72,16 @@ export PATH="${HOME}/path/to/vaspup/bin:${PATH}"
 ```
 
 To enable the POTCAR functionality, you should also set the VASP_POTENTIALS environment variable to
-point to your potentials directory. E.g. Edit your `~/.bashrc` file to include:
+point to your potentials directory. This can be a single potential set, or a parent directory
+containing several sets. E.g. Edit your `~/.bashrc` file to include:
 
 ```bash
-export VASP_POTENTIALS="${HOME}/path/to/potentials"
+export VASP_POTENTIALS="${HOME}/path/to/vasp_pp"
+export VASP_POTENTIAL_SET="PBE.64"
 ```
+
+If `VASP_POTENTIAL_SET` is omitted and multiple potential sets are found, `generate-potcar` will
+prompt you to choose one.
 
 ## Disclaimer
 
