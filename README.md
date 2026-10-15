@@ -86,3 +86,24 @@ prompt you to choose one.
 ## Disclaimer
 
 This program is not affiliated with VASP. This program is made available under the MIT License; you are free to modify and use the code, but do so at your own risk.
+
+
+## Reproducible installation
+
+This preservation branch contains the scripts used on ARCHER2 on 15 October 2026.
+Install with `python -m pip install .`, or use a Git URL pinned to this branch's
+full commit SHA in a Conda environment YAML. Scripts and their helper files are
+installed together under the environment prefix; no source-checkout PATH edits
+are needed. GNU/Linux, Bash and standard GNU command-line utilities are required;
+`bc` is needed for numerical post-processing. VASP, licensed pseudopotentials and
+the scheduler are supplied separately by the destination HPC.
+
+The POTCAR set selector is preserved. Set `VASP_POTENTIALS` to the
+licensed potential directory on the destination machine.
+
+All legacy commands are available through `vaspup1 <command>` and
+`vaspup1-<command>`. Unique commands retain their original names.
+The overlapping `generate-converge` and `data-converge` names are reserved
+for vaspup2, matching the original PATH precedence when both are installed.
+The old SOD helpers still depend on external `~/scripts/data-*.sh` files
+and SOD software; installing this package does not provide those dependencies.
